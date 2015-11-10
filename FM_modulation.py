@@ -37,17 +37,18 @@ modulation_index = 0.5
 
 t, fm = FMmod(sample_rate, carrier_frequency, modulation_frequency, modulation_index)
 
+figure(1)
 plot(t,fm)
 ylim(-1.2,1.2)
 gcf().set_size_inches(4,3)
 savefig('simple_fm_generator.png')
-show()
 
 t, fm = AMmod(2000.0, 25, 3, 2)
 
+figure(2)
 plot(t,fm)
 ylim(-1.2,1.2)
 gcf().set_size_inches(4,3)
-savefig('simple_fm_generator.png')
+savefig('simple_am_generator.png')
 show()
 
