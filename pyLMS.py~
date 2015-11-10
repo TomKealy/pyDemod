@@ -1,0 +1,49 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def lms(u, d, num_taps, mu):
+    """A simple LMS equaliser:
+    Inputs:
+    u - input signal
+    d - desired signal
+    num_taps - filter length
+    mu - step size
+
+    Outputs:
+    y - filtered signal
+    e - estimation error
+    w - final filter coeffiecents
+
+    """
+
+    "init"
+    N = len(u)
+    y = np.zeros(N)
+    w = np.zeros(num_taps)
+    e = np.zeros(N)
+    
+    for n in xrange(N):
+        x = np.flipud(u[n:n+num_taps])
+        y[n] = np.dot(x, w)
+        e[n] = d[n+num_taps-1] - y[n]
+        w = w + mu*x*e[n] 
+        y[n] = np.dot(x, w)
+
+    return y, e, w
+
+np.random.seed(1337)
+ulen    = 2000
+coeff   = np.concatenate(([1], np.zeros(10), [-0.9], np.zeros(7), [0.1]))
+u       = np.random.randn(ulen)
+d       = np.convolve(u, coeff)
+num_taps       = 20 # No. of taps
+step    = 0.003 # Step size
+y, e, w = lms(u, d, num_taps, step)
+print np.allclose(w, coeff)
+
+
+plt.figure()
+plt.subplot(1,1,1)
+plt.plot(np.abs(e[0:400]))
+
+plt.show()
