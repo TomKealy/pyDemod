@@ -4,6 +4,17 @@ import traceback
 import sys
 
 class LMS:
+    """A simple LMS equaliser:
+         Inputs:
+             u - input signal
+             d - desired signal
+             num_taps - filter length
+             mu - step size
+         Outputs:
+             y - filtered signal
+             e - estimation error
+             w - final filter coeffiecents
+    """
     def __init__(self, input_signal, desired_signal, num_taps, learning_rate):
         self.u = input_signal
         self.d = desired_signal
@@ -42,3 +53,14 @@ except:
     traceback.print_exc()
     pdb.post_mortem(tb)
 
+"""A simple LMS equaliser:
+Inputs:
+   u - input signal
+   d - desired signal
+   num_taps - filter length
+   mu - step size
+Outputs:
+   y - filtered signal
+   e - estimation error
+   w - final filter coeffiecents
+"""
