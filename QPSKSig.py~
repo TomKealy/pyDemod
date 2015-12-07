@@ -1,0 +1,32 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import NullFormatter
+from scipy.special import erfc
+import sys
+import logging
+
+logging.basicConfig(stream = sys.stderr, level = logging.DEBUG)
+
+N = 64
+x = 2*np.random.random_integers(0, 1, (N, N)) - 1
+y = 2*np.random.random_integers(0, 1, (N, N)) - 1
+
+QPSK_signal = x + 1j*y 
+
+t, w = (numpy.empty((N, N), dtype = complex) for i range(2))
+
+logging.debug('s = %s', s)
+
+#for plotting
+left, width = 0.1, 0.65
+bottom, height = 0.1, 0.65
+bottom_h = left_h = left + width + 0.02
+
+rect_scatter = [left, bottom, width, height]
+rect_histx = [left, bottom_h, width, 0.02]
+rect_histy = [left_h, bottom, 0.2, height]
+
+#rect figure
+plt.figure(1, figsize = (8, 8))
+
+
